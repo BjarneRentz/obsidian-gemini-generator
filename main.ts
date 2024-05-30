@@ -9,16 +9,16 @@ import {
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-interface MyPluginSettings {
+interface GeminiGeneratorSettings {
 	apiKey: string;
 }
 
-const DEFAULT_SETTINGS: MyPluginSettings = {
+const DEFAULT_SETTINGS: GeminiGeneratorSettings = {
 	apiKey: "",
 };
 
-export default class MyPlugin extends Plugin {
-	settings: MyPluginSettings;
+export default class GeminiGenerator extends Plugin {
+	settings: GeminiGeneratorSettings;
 
 	async onload() {
 		await this.loadSettings();
@@ -38,6 +38,8 @@ export default class MyPlugin extends Plugin {
 					new Notice("Could not get filename", 1500);
 				}
 
+				const notice = new Notice("🔥 Generating", 0);
+
 				editor.setCursor(editor.lastLine());
 
 				const prompt = `Write a me an Obsidian Markdown Note without the Title on:${title} `;
@@ -49,7 +51,9 @@ export default class MyPlugin extends Plugin {
 					editor.setCursor(editor.lastLine());
 				}
 
-				new Notice("✅ Finished", 1500);
+				notice.setMessage("✅ Finished");
+
+				setTimeout(() => notice.hide(), 1500);
 			},
 		});
 
@@ -73,9 +77,9 @@ export default class MyPlugin extends Plugin {
 }
 
 class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
+	plugin: GeminiGenerator;
 
-	constructor(app: App, plugin: MyPlugin) {
+	constructor(app: App, plugin: GeminiGenerator) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
