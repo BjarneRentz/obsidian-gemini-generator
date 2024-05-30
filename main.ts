@@ -7,7 +7,7 @@ import {
 	Setting,
 } from "obsidian";
 
-// Remember to rename these classes and interfaces!
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 interface MyPluginSettings {
 	apiKey: string;
@@ -23,21 +23,33 @@ export default class MyPlugin extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
+		const genAi = new GoogleGenerativeAI(this.settings.apiKey);
+		const model = genAi.getGenerativeModel({
+			model: "gemini-1.5-flash-latest",
+		});
+
 		// This adds a simple command that can be triggered anywhere
 		this.addCommand({
 			id: "generate-note",
 			name: "Generate Note with Gemini",
-			editorCallback: (editor: Editor) => {
+			editorCallback: async (editor: Editor) => {
 				const title = this.app.workspace.getActiveFile()?.basename;
 				if (!title) {
 					new Notice("Could not get filename", 1500);
 				}
-				console.log(title);
 
-				editor.replaceRange(
-					"This is generated \n and formatted Text",
-					editor.getCursor()
-				);
+				editor.setCursor(editor.lastLine());
+
+				const prompt = `Write a me an Obsidian Markdown Note without the Title on:${title} `;
+				const result = await model.generateContentStream(prompt);
+
+				for await (const chunk of result.stream) {
+					const chunkText = chunk.text();
+					editor.replaceRange(chunkText, editor.getCursor());
+					editor.setCursor(editor.lastLine());
+				}
+
+				new Notice("✅ Finished", 1500);
 			},
 		});
 
