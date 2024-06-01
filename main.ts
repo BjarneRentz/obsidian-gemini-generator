@@ -57,6 +57,8 @@ export default class GeminiGenerator extends Plugin {
 			},
 		});
 
+		console.log(`Test`)
+
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new SampleSettingTab(this.app, this));
 	}
@@ -67,7 +69,7 @@ export default class GeminiGenerator extends Plugin {
 		this.settings = Object.assign(
 			{},
 			DEFAULT_SETTINGS,
-			await this.loadData()
+			await this.loadData(),
 		);
 	}
 
@@ -99,7 +101,7 @@ class SampleSettingTab extends PluginSettingTab {
 					.onChange(async (value) => {
 						this.plugin.settings.apiKey = value;
 						await this.plugin.saveSettings();
-					})
+					}),
 			);
 	}
 }
