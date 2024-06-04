@@ -19,12 +19,23 @@ export class GeminiClient {
     private checkApiKey() {
         if(!this.genAi.apiKey) {
             this.genAi = new GoogleGenerativeAI(this.pluginSettings.apiKey);
+            this.model = this.genAi.getGenerativeModel({
+                model: "gemini-1.5-flash-latest",
+            });
         }
     }
 
-    public async generateNote (prompt: string) : Promise<GenerateContentStreamResult> {
+    public async generateNote (prompt: string) : Promise<GenerateContentStreamResult| undefined> {
         this.checkApiKey();
-
-        return await this.model.generateContentStream(prompt);
+        
+        try
+        {
+            return await this.model.generateContentStream(prompt);
+        }
+        catch (error) {
+            console.error("Could not perfrom request to Gemini API", error)
+            return undefined;
+        }
+    
     }
 }

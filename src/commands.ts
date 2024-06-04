@@ -24,6 +24,11 @@ function generateNote(plugin : GeminiGenerator, geminiClient : GeminiClient) {
             
             const result = await geminiClient.generateNote(prompt);
 
+            if(!result){
+                notice.setMessage("❌ An error occured during the Google Gemini Request")
+                return;
+            }
+
             for await (const chunk of result.stream) {
                 const chunkText = chunk.text();
                 editor.replaceRange(chunkText, editor.getCursor());
