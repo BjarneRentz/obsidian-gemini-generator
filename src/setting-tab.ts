@@ -18,10 +18,10 @@ export class GeminiGeneratorSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName("API-Key")
-			.setDesc("Gemini Api-Key")
+			.setName("Api Key")
+			.setDesc("Gemini Api Key")
 			.addText((text) => text
-				.setPlaceholder("Enter your API-Keysecret")
+				.setPlaceholder("Enter your API-Key")
 				.setValue(this.plugin.settings.apiKey)
 				.onChange(async (value) => {
 					this.plugin.settings.apiKey = value;
