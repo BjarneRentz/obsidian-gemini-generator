@@ -1,10 +1,10 @@
 {
 	"id": "obsidian-gemini-generator",
 	"name": "Gemini Generator",
-	"version": "0.0.1",
-	"minAppVersion": "0.15.0",
+	"version": "1.0.0",
+	"minAppVersion": "1.5.12",
 	"description": "Let Google Gemini generator your notes!",
 	"author": "Bjarne Rentz",
-	"authorUrl": "https://obsidian.md",
+	"authorUrl": "https://github.com/BjarneRentz",
 	"isDesktopOnly": false
 }
