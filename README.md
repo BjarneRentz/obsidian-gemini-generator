@@ -20,6 +20,7 @@ To get one, you need a Google Account. Then create an API-key at the [Google AI 
 
 With that done, head to the settings tab for Gemini Generator and paste your Api Key.
 
+Now you can use the `Generate Note` command to let Gemini generate the note.
 
 # Privacy
 This plugin uses the Gemini-Api from google to generate the notes. Thus, for every note that one generates, the title of the note is sent as a http request against the API.
