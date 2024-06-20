@@ -7,7 +7,7 @@ function generateNote(plugin : GeminiGenerator, geminiClient : GeminiClient) {
     
     return {
         id: "generate-note",
-        name: "Generate Note with Gemini",
+        name: "Generate note with Gemini",
         editorCallback: async (editor: Editor) => {
             
             const title = plugin.app.workspace.getActiveFile()?.basename;
