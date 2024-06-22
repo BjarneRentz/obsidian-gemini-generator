@@ -1,6 +1,4 @@
-import {
-	Plugin,
-} from "obsidian";
+import { Plugin } from "obsidian";
 
 import { GeminiGeneratorSettings } from "./settings";
 import { DEFAULT_SETTINGS } from "./settings";
@@ -10,8 +8,9 @@ import { GeminiGeneratorSettingTab } from "./setting-tab";
 export default class GeminiGenerator extends Plugin {
 	settings: GeminiGeneratorSettings;
 
+	
 	async onload() {
-		await this.loadSettings();
+		await this.loadSettings();		
 
 		this.addEditorCommands();
 		
@@ -39,5 +38,3 @@ export default class GeminiGenerator extends Plugin {
 		}
 	}
 }
-
-

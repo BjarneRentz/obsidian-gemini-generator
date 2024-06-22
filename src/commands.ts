@@ -1,14 +1,18 @@
 import { Editor, Notice } from "obsidian";
 import GeminiGenerator from "./main"
 import { GeminiClient } from "./gemini-client";
+import { ProcessingSettings } from "./response-processing/response-processor";
+import { buildPipeline } from "./response-processing/processing-pipeline";
 
 
-function generateNote(plugin : GeminiGenerator, geminiClient : GeminiClient) {
+function buildGenerateNoteCommand(plugin : GeminiGenerator, geminiClient : GeminiClient) {
     
     return {
         id: "generate-note",
         name: "Generate Note with Gemini",
         editorCallback: async (editor: Editor) => {
+            
+            const pipeline = buildPipeline(plugin.settings, editor);
             
             const title = plugin.app.workspace.getActiveFile()?.basename;
             if (!title) {
@@ -29,12 +33,14 @@ function generateNote(plugin : GeminiGenerator, geminiClient : GeminiClient) {
                 return;
             }
 
+            const settings = <ProcessingSettings>{noteTitle: title};
+
             for await (const chunk of result.stream) {
                 const chunkText = chunk.text();
-                editor.replaceRange(chunkText, editor.getCursor());
-                editor.setCursor(editor.lastLine());
+                pipeline.process(chunkText, settings);
             }
 
+            pipeline.reset();
             notice.setMessage("✅ Finished");
 
             setTimeout(() => notice.hide(), 1500);
@@ -47,7 +53,7 @@ export const getEditorCommands = (plugin : GeminiGenerator) => {
     const geminiClient = new GeminiClient(plugin.settings);
 
     return [
-        generateNote(plugin, geminiClient)
+        buildGenerateNoteCommand(plugin, geminiClient)
     ];
 
 }

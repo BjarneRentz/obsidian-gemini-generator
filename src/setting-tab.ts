@@ -28,5 +28,19 @@ export class GeminiGeneratorSettingTab extends PluginSettingTab {
 					await this.plugin.saveSettings();
 				})
 			);
+
+		new Setting(containerEl).setName('Response Processing').setHeading();
+
+		new Setting(containerEl)
+			.setName("Remove note title")
+			.setDesc("Remove headlines with the same title as the note.")
+			.addToggle(toogle => toogle
+				.setValue(this.plugin.settings.removeHeadlineEnabled)
+				.onChange(async (newValue) => {
+					this.plugin.settings.removeHeadlineEnabled = newValue;
+					await this.plugin.saveSettings();
+				})
+			);
+
 	}
 }
