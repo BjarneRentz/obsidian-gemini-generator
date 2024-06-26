@@ -33,7 +33,7 @@ export class GeminiGeneratorSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName("Remove note title")
-			.setDesc("Remove headlines with the same title as the note.")
+			.setDesc("❗This feature is under active development, if you encounter bugs, please report them. If enabled, removes headlines with the same title as the note.")
 			.addToggle(toogle => toogle
 				.setValue(this.plugin.settings.removeHeadlineEnabled)
 				.onChange(async (newValue) => {

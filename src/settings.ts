@@ -3,6 +3,6 @@ export interface GeminiGeneratorSettings {
 	removeHeadlineEnabled : boolean;
 }export const DEFAULT_SETTINGS: GeminiGeneratorSettings = {
 	apiKey: "",
-	removeHeadlineEnabled : true
+	removeHeadlineEnabled : false
 };
 
