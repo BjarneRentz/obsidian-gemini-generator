@@ -5,8 +5,10 @@ import { ProcessingSettings } from "./response-processing/response-processor";
 import { buildPipeline } from "./response-processing/processing-pipeline";
 
 
-function buildGenerateNoteCommand(plugin : GeminiGenerator, geminiClient : GeminiClient) {
+function buildGenerateNoteCommand(plugin : GeminiGenerator) {
     
+    const geminiClient = new GeminiClient(plugin.settings);
+
     return {
         id: "generate-note",
         name: "Generate note with Gemini",
@@ -48,12 +50,6 @@ function buildGenerateNoteCommand(plugin : GeminiGenerator, geminiClient : Gemin
     }
 }
 
-export const getEditorCommands = (plugin : GeminiGenerator) => {
-
-    const geminiClient = new GeminiClient(plugin.settings);
-
-    return [
-        buildGenerateNoteCommand(plugin, geminiClient)
+export const getEditorCommands = (plugin : GeminiGenerator) => [
+        buildGenerateNoteCommand(plugin)
     ];
-
-}
