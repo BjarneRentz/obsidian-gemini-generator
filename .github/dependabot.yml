@@ -8,7 +8,7 @@ updates:
     groups:
       typescript-ecosystem:
         patterns:
-          - "typescript*"
+          - "typescript"
           - "@types/*"
           - "tslib"
       dev-tools:
