@@ -11,13 +11,6 @@ updates:
           - "typescript*"
           - "@types/*"
           - "tslib"
-
-  # Development tools (ESLint, Prettier)
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-    groups:
       dev-tools:
         patterns:
           - "eslint*"
@@ -25,24 +18,10 @@ updates:
           - "@typescript-eslint/*"
           - "typescript-eslint"
           - "prettier"
-
-  # Build tools
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-    groups:
       build-tools:
         patterns:
           - "esbuild"
           - "builtin-modules"
-
-  # Core dependencies
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    groups:
       core-deps:
         patterns:
           - "@google/generative-ai"
