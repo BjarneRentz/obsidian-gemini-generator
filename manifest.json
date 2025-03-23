@@ -1,7 +1,7 @@
 {
 	"id": "gemini-generator",
 	"name": "Gemini Generator",
-	"version": "1.1.6",
+	"version": "1.2.0",
 	"minAppVersion": "1.8.7",
 	"description": "Let Google Gemini generator your notes!",
 	"author": "Bjarne Rentz",
