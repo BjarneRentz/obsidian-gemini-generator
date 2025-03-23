@@ -12,7 +12,7 @@ export class GeminiClient {
         this.pluginSettings = settings;
         this.genAi = new GoogleGenerativeAI(this.pluginSettings.apiKey);
         this.model = this.genAi.getGenerativeModel({
-            model: "gemini-1.5-flash-latest",
+            model: "gemini-2.0-flash",
         });
     }
 
@@ -20,7 +20,7 @@ export class GeminiClient {
         if(!this.genAi.apiKey) {
             this.genAi = new GoogleGenerativeAI(this.pluginSettings.apiKey);
             this.model = this.genAi.getGenerativeModel({
-                model: "gemini-1.5-flash-latest",
+                model: "gemini-2.0-flash",
             });
         }
     }
