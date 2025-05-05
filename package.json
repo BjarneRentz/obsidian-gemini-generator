@@ -27,6 +27,6 @@
 		"typescript-eslint": "^8.29.1"
 	},
 	"dependencies": {
-		"@google/generative-ai": "^0.24.0"
+		"@google/generative-ai": "^0.24.1"
 	}
 }
