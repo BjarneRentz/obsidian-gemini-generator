@@ -3,6 +3,7 @@ import GeminiGenerator from "./main"
 import { GeminiClient } from "./gemini-client";
 import { ProcessingSettings } from "./response-processing/response-processor";
 import { buildPipeline } from "./response-processing/processing-pipeline";
+import { substituePrompt } from "./prompt-substituer";
 
 
 function buildGenerateNoteCommand(plugin : GeminiGenerator) {
@@ -26,8 +27,8 @@ function buildGenerateNoteCommand(plugin : GeminiGenerator) {
 
             editor.setCursor(editor.lastLine());
 
-            const prompt = `Write a me an Obsidian Markdown Note without the Title on:${title} `;
-            
+            const prompt = substituePrompt(plugin.settings.defaultPrompt, title);
+
             const result = await geminiClient.generateNote(prompt);
 
             if(!result){

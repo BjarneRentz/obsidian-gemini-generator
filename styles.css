@@ -1,8 +1,10 @@
-/*
-
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
-
-If your plugin does not need CSS, delete this file.
-
-*/
+.default-prompt-textarea {
+    width: 100%;
+    /* Full width */
+    height: 100px;
+    /* Adjust height as needed */
+    resize: vertical;
+    /* Allow vertical resizing */
+    font-size: 14px;
+    /* Adjust font size */
+}

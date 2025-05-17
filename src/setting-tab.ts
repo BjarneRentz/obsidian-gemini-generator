@@ -29,18 +29,23 @@ export class GeminiGeneratorSettingTab extends PluginSettingTab {
 				})
 			);
 
-		new Setting(containerEl).setName('Response Processing').setHeading();
 
-		new Setting(containerEl)
-			.setName("Remove note title")
-			.setDesc("❗This feature is under active development, if you encounter bugs, please report them. If enabled, removes headlines with the same title as the note.")
-			.addToggle(toogle => toogle
-				.setValue(this.plugin.settings.removeHeadlineEnabled)
-				.onChange(async (newValue) => {
-					this.plugin.settings.removeHeadlineEnabled = newValue;
-					await this.plugin.saveSettings();
-				})
-			);
+			containerEl.createEl("h3", { text: "Prompts" });
+			containerEl.createEl("p", { 
+				text: "In here you can customize the default prompt used for generation of the note. Use {TITLE} to insert the title of the note." 
+			});
 
+			new Setting(containerEl)
+            .setName("Default Prompt")
+            .setDesc("Set the default prompt for generation")
+            .addTextArea((textArea) => textArea
+                .setPlaceholder("Enter your default prompt")
+                .setValue(this.plugin.settings.defaultPrompt)
+                .onChange(async (value) => {
+                    this.plugin.settings.defaultPrompt = value;
+                    await this.plugin.saveSettings();
+                })
+				.inputEl.addClass("default-prompt-textarea")
+            );
 	}
 }
